@@ -22,4 +22,4 @@ const cats = [
 	},
 ];
 
-export default cats;
+module.exports = cats;
