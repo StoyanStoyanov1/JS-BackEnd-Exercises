@@ -1,6 +1,7 @@
 const cats = require('./cats');
 const fs = require("fs");
 const http = require("http");
+const querystring = require("querystring");
 
 
 const views = {
@@ -25,6 +26,52 @@ const server = http.createServer((req, res) => {
 				res.end();
 			});
 		});
+	} else if (req.url === '/styles/site.css') {
+		fs.readFile(views.style, 'utf-8', (err, result) => {
+			if (err) {
+				res.statusCode = 404;
+				return res.end();
+			}
+
+			res.writeHead(200, {'Content-Type': 'text/css'});
+			res.write(result);
+			res.end();
+		})
+	} else if (req.url === '/cats/add-cat' && req.method === 'GET') {
+		fs.readFile(views.addCat, 'utf-8', (err, result) => {
+
+			res.writeHead(200, {
+				'content-type': 'text/html'
+			});
+
+			res.write(result);
+			res.end();
+		})
+	} else if (req.url === '/cats/add-cat' && req.method === 'POST') {
+		let body = '';
+
+		req.on('data', (chunk) => {
+			body += chunk;
+		});
+
+		req.on('close', () => {
+			const parsedBody = querystring.parse(body);
+			parsedBody.id = cats[cats.length - 1].id + 1
+
+			cats.push(parsedBody);
+
+			res.writeHead(302, {
+				'location': '/'
+			});
+			res.end();
+		})
+	} else {
+		res.writeHead(200, {
+			'content-type': 'text/html'
+		});
+
+		res.write('<h1>404</h1>');
+		res.end();
 	}
 
 
@@ -51,5 +98,5 @@ function render(view, dataArr, callback) {
 
 
 
-server.listen(5500)
-console.log('Server is listening on port 5500...');
+server.listen(5000)
+console.log('Server is listening on port 5000...');
