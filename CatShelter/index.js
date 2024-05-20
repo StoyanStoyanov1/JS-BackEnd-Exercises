@@ -14,7 +14,11 @@ function render(view, dataArr, callback) {
 				const pattern = new RegExp(`{{${key}}`, 'g');
 
 				return acc.replace(pattern, data[key]);
-			})
-		})
+			});
+		}).join('\n')
+
+		callback(null, htmlResult);
 	})
 }
+
+console.log('Server is listening on port 5000...');
