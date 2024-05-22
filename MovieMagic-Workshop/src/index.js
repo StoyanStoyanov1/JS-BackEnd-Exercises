@@ -2,9 +2,9 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
 
-const routes = require('./routes');
 const configHandlebars = require('./config/configHandlebars');
 const configExpress = require('./config/configExpress');
+const routes = require('./routes');
 
 const app = express();
 const port = 5500;
