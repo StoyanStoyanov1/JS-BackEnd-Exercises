@@ -4,6 +4,7 @@ const path = require('path');
 
 function configExpress (app) {
 	app.use(express.static('public'));
+	app.use(express.urlencoded({ extended: false}));
 
 	return app;
 }
