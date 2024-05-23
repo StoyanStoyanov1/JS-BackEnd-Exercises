@@ -15,12 +15,19 @@ const student = new Student({
 	age: 17,
 });
 
-student.save().then((createdStudent => {
-	console.log('student, saved successfully');
-	console.log(createdStudent)
-}));
+// student.save().then((createdStudent => {
+// 	console.log('student, saved successfully');
+// 	console.log(createdStudent)
+// }));
+//
+// Student.create({
+// 	name: 'Other',
+// 	age: 24,
+// }).then(data => console.log(data));
 
-Student.create({
-	name: 'Other',
-	age: 24,
-}).then(data => console.log(data));
+//Get Data
+
+Student.find()
+	.then(students => {
+		students.forEach(student => {console.log(student.name)})
+	})
