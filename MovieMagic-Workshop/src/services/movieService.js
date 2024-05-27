@@ -1,34 +1,35 @@
-const movies = [];
+const Movie = require("../models/Movie");
 
-exports.getAll = () => {
-	return movies.slice();
-}
-
-exports.create = (movieData) => {
-	movieData._id = movies.length + 1;
-	movies.push(movieData)
-}
-
-exports.getOne = (movieId) => {
-	const movie = movies.find(movie => movie._id == movieId);
-
-	return movie;
-}
+exports.getAll = () => Movie.find();
 
 exports.search = (title, genre, year) => {
-	let foundMovies = movies.slice();
+	let query = {};
 
 	if (title) {
-		foundMovies = foundMovies.filter(movie => movie.title.includes(title))
+		query.title = new RegExp(title, 'i');
 	}
 
 	if (genre) {
-		foundMovies = foundMovies.filter(movie => movie.genre.includes(genre));
+		query.genre = genre.toLowerCase();
 	}
 
 	if (year) {
-		foundMovies = foundMovies.filter(movie => movie.year === year);
+		query.year = year;
 	}
 
-	return foundMovies;
+	return Movie.find(query);
+};
+
+exports.getOne = (movieId) => Movie.findById(movieId).populate('casts');
+
+exports.create = (movieData) => Movie.create(movieData);
+
+exports.attach = async  (movieId, castId) => {
+	const movie = await this.getOne(movieId);
+
+	movie.casts.push(cast);
+
+	await movie.save();
+
+	return movie;
 }
