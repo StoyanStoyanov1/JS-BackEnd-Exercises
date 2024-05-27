@@ -34,12 +34,12 @@ const movieSchema = new mongoose.Schema({
 	imageUrl: {
 		type: String,
 		required: true,
-		math: /^https?:\/\//
+		match: /^https?:\/\//
 	},
 	casts: [{
 		type: mongoose.Types.ObjectId,
 		ref: 'Cast'
-	}],
+	}]
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
