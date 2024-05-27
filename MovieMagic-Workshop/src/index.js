@@ -1,6 +1,5 @@
 const express = require('express');
-const handlebars = require('express-handlebars');
-const path = require('path');
+const mongoose = require('mongoose');
 
 const configHandlebars = require('./config/configHandlebars');
 const configExpress = require('./config/configExpress');
@@ -14,4 +13,8 @@ configExpress(app);
 
 app.use(routes)
 
-app.listen(port, () => console.log(`Service is listening on port ${port}...`));
+mongoose.connect('mongodb://localhost:27017/magic-movies').then(() => {
+	console.log('MongoDB Connected');
+
+	app.listen((port, () => console.log('Server is running on port', port)));
+});
