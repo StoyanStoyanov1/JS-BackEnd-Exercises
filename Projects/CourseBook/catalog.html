@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog Page</title>
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+
+    <!-- In case of error, you should display div with class "errorContainer" -->
+    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
+
+    <!-- <div>
+            <div class="errorContainer">
+                <p>Error</p>
+            </div>
+        </div> -->
+
+    <div class="navigation">
+        <nav>
+            <img src="./images/logo.png">
+            <ul>
+                <!-- Guest users and Logged users -->
+                <li><a href="#">Home</a></li>
+                <li><a href="#">All Courses</a></li>
+                <!--For guest users-->
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+                <!--For loggin users-->
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Create Course Offers</a></li>
+                <li><a href="#">Logout</a></li>
+
+            </ul>
+        </nav>
+    </div>
+
+    <main>
+
+        <section id="all-course-page">
+            <article class="all-course-title">
+                <h1>All Courses</h1>
+            </article>
+
+            <!--If there are course in the database, show each one-->
+            <article class="all-course-card">
+                <article class="all-course-card-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img src="https://cdn.pixabay.com/photo/2015/08/24/20/13/welcome-905562_1280.png">
+                </article>
+
+                <article class="all-course-card-content">
+                    <!--You must put the headline value in <h2>-->
+                    <h2>Spanish 1-4: Beginner, Elementary</h2>
+                    <!--You must put the headline value in <h3>-->
+                    <h3>Type: Language</h3>
+                    <h3>Price: €15</h3>
+                </article>
+
+                <article class="all-course-card-buttons">
+                    <a href="#" class="btn-details">Details</a>
+                </article>
+            </article>
+
+            <article class="all-course-card">
+                <article class="all-course-card-image">
+                    <!-- Do not forget to change the path to the image -->
+                    <img
+                        src="https://media.istockphoto.com/id/1092170968/vector/open-book-with-history-doodles-and-lettering.jpg?s=1024x1024&w=is&k=20&c=K5vJfRRpMeZXaSafw0gA1Wxya6XtiOqXlRqHOAkIJAM=">
+                </article>
+
+                <article class="all-course-card-content">
+                    <!--You must put the headline value in <h2>-->
+                    <h2>Art History Prehistory to the Renaissance</h2>
+                    <!--You must put the headline value in <h3>-->
+                    <h3>Type: Art History</h3>
+                    <h3>Price: €17</h3>
+                </article>
+
+                <article class="all-course-card-buttons">
+                    <a href="#" class="btn-details">Details</a>
+                </article>
+            </article>
+
+            <!--If there are still no blogs in the database display:-->
+            <!-- <article class="not-available-courses">
+                <h1>No course created yet.</h1>
+            </article> -->
+
+        </section>
+    </main>
+
+    <footer>Back-End 2023</footer>
+
+</body>
+
+</html>
