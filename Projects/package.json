@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "express-handlebars": "^7.1.2"
+  }
+}
