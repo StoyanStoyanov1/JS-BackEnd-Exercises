@@ -11,11 +11,13 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "express-handlebars": "^7.1.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.4.0",
-    "nodemon": "^3.1.2"
+    "nodemon": "^3.1.2",
+    "util": "^0.12.5"
   }
 }
