@@ -33,6 +33,10 @@ exports.login = async ({email , password}) => {
 		throw new Error('Username or password is invalid');
 	}
 
+	const token = await generateToken(user);
+
+	return token;
+
 }
 
 async function generateToken(user) {
