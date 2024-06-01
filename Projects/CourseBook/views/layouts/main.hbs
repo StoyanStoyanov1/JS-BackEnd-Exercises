@@ -30,7 +30,7 @@
             <li><a href="/">Home</a></li>
             <li><a href="#">All Courses</a></li>
             <!--For guest users-->
-            {{#if isAuthenticated}}
+            {{#unless isAuthenticated}}
                 <li><a href="/auth/login">Login</a></li>
                 <li><a href="/auth/register">Register</a></li>
                 <!--For loggin users-->
@@ -38,7 +38,7 @@
                 <li><a href="#">Profile</a></li>
                 <li><a href="#">Create Course Offers</a></li>
                 <li><a href="/auth/logout">Logout</a></li>
-            {{/if}}
+            {{/unless}}
 
         </ul>
     </nav>

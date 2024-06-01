@@ -3,13 +3,19 @@ const path = require('path');
 const express = require('express');
 const handlebars = require('express-handlebars');
 const app = express();
+const cookieParser = require('cookie-parser');
+
 const routes = require('./routes');
 const mongoose = require('mongoose');
+const {authMiddleware} = require('./middleware/authMiddleware');
+
 
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser())
+app.use(authMiddleware);
 
 app.engine('hbs', handlebars.engine({
 	extname: 'hbs',

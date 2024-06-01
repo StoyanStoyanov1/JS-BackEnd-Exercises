@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const {SECRET} = require('../config');
 
 exports.authMiddleware = async (req, res, next) => {
-	const token = req.cookie['auth'];
+	const token = req.cookies['auth'];
 
 	if (!token) {
 		return next();

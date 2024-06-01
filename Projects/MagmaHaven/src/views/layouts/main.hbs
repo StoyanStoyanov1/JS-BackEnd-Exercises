@@ -25,10 +25,14 @@
             <li><a href="#">Home</a></li>
             <li><a href="#">Search</a></li>
             <li><a href="#">All Volcanoes</a></li>
-            <li><a href="#">Create Volcano Wiki</a></li>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/auth/register">Register</a></li>
-            <li><a href="/auth/logout">Logout</a></li>
+            {{#if isAuthecticated}}
+
+                <li><a href="#">Create Volcano Wiki</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            {{else}}
+                <li><a href="/auth/login">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+            {{/if}}
         </ul>
     </nav>
 </header>
@@ -36,7 +40,7 @@
 <main>
 
 </main>
-    {{{body}}}
+{{{body}}}
 <footer>
     <p>&copy JS Back-End 2024</p>
 </footer>
