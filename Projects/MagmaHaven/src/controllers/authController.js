@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 const authService = require("../services/authService");
+const {getErrorMessage} = require("../utils/errorUtils");
 
 router.get('/register', (req, res) => {
 	res.render('auth/register');
@@ -16,7 +17,7 @@ router.post('/register', async (req, res) => {
 
 		res.redirect('/');
 	} catch (err) {
-		res.render(getErrorMessage);
+		res.render('auth/login', {error: getErrorMessage(err)});
 	}
 });
 
