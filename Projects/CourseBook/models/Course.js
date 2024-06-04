@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const coursesSchema = new mongoose.Schema({
 	title: {
 		type: String,
+		minLength: 5,
 		required: true,
 	},
 	type: {
@@ -11,18 +12,22 @@ const coursesSchema = new mongoose.Schema({
 	},
 	certificate: {
 		type: String,
+		minLength: 2,
 		required: true,
 	},
 	image: {
 		type: String,
+		match: /^https?:\/\/$/,
 		required: true,
 	},
 	description: {
 		type: String,
+		minLength: 10,
 		required: true,
 	},
 	price: {
 		type: Number,
+		min: 0,
 		required: true,
 	},
 	signUpList: [
