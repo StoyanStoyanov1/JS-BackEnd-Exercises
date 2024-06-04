@@ -12,9 +12,12 @@ router.get('/', async (req, res) => {
 
 router.get('/:courseId/details', async (req, res) => {
 	const course = await courseService.getOneDetailed(req.params.courseId).lean();
-	const signUpUsers = course.signUpList.map(user => user.username).join(', ')
+	const signUpUsers = course.signUpList.map(user => user.username).join(', ');
 
-	res.render('courses/details', {...course, signUpUsers});
+	const isOwner = course.owner._id == req.user?._id;
+	const isSigned = course.signUpList.some(user => user._id == req.user?._id)
+
+	res.render('courses/details', {...course, signUpUsers, isOwner, isSigned});
 });
 
 router.get('/:courseId/sign-up', async (req, res) => {
