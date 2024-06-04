@@ -10,6 +10,12 @@ router.get('/', async (req, res) => {
 	res.render('courses/catalog', {courses});
 })
 
+router.get('/:courseId/details', async (req, res) => {
+	const course = await courseService.getOneDetailed(req.params.courseId).lean();
+
+	res.render('courses/details', {...course});
+})
+
 router.get('/create', isAuth, (req, res) => {
 	res.render('courses/create');
 })
