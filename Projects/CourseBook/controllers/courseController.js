@@ -8,17 +8,23 @@ router.get('/', async (req, res) => {
 	const courses = await  courseService.getAll().lean();
 
 	res.render('courses/catalog', {courses});
-})
+});
 
 router.get('/:courseId/details', async (req, res) => {
 	const course = await courseService.getOneDetailed(req.params.courseId).lean();
+	const signUpUsers = course.signUpList.map(user => user.username).join(', ')
 
-	res.render('courses/details', {...course});
-})
+	res.render('courses/details', {...course, signUpUsers});
+});
+
+router.get('/:courseId/sign-up', async (req, res) => {
+	await courseService.signUp(req.params.courseId, req.user._id);
+	res.redirect(`/courses/${req.params.courseId}/details`)
+});
 
 router.get('/create', isAuth, (req, res) => {
 	res.render('courses/create');
-})
+});
 
 router.post('/create', isAuth, async (req, res) => {
 	const courseData = req.body;
@@ -30,6 +36,6 @@ router.post('/create', isAuth, async (req, res) => {
 	} catch (err)  {
 		res.render('courses/create',  {...courseData, error: getErrorMessage(err)})
 	}
-})
+});
 
 module.exports = router;

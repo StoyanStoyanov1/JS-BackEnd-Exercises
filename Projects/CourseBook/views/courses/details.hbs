@@ -10,7 +10,7 @@
         <h3>Price: €{{price}}</h3>
         <h3>By: {{owner.email}}</h3>
         <!--If there are sign up users-->
-        <h4>Signed By: cate.brown, nikolas.p</h4>
+        <h4>Signed By: {{signUpUsers}}</h4>
         <!--If there are no sign up users-->
         <h4>Nobody has signed in for this course yet</h4>
     </div>
@@ -22,7 +22,7 @@
         <a href="#">Edit</a>
         <a href="#">Delete</a>
         <!-- logged in user who has not yet sign up for the course-->
-        <a href="#">Sign up</a>
+        <a href="/courses/{{_id}}/sign-up">Sign up</a>
         <!-- logged in user who has already sign up for the course-->
         <p class="sign-up">You've already signed up for this course!</p>
 
