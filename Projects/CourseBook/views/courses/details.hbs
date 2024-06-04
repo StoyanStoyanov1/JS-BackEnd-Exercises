@@ -21,8 +21,8 @@
     <div class="btn-container">
         {{#if isAuthenticated}}
             {{#if isOwner}}
-                <a href="#">Edit</a>
-                <a href="#">Delete</a>
+                <a href="/courses/{{_id}}/edit">Edit</a>
+                <a href="/courses/{{_id}}/delete">Delete</a>
             {{else if isSigned}}
                 <p class="sign-up">You've already signed up for this course!</p>
             {{else}}

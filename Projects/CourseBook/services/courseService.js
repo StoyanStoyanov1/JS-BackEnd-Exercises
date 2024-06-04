@@ -22,3 +22,5 @@ exports.signUp = async (courseId, userId) => {
 	await Course.findByIdAndUpdate(courseId, {$push: {signUpList: userId}});
 	await User.findByIdAndUpdate(userId, {$push: {signedUpCourses: courseId}});
 };
+
+exports.delete = (courseId) => Course.findByIdAndDelete(courseId);
