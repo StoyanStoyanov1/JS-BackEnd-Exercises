@@ -26,7 +26,23 @@ exports.authMiddleware = async (req, res, next) => {
 
 exports.isAuth = (req, res, next) => {
 	if (!req.user) {
-		res.redirect('auth/login');
+		return res.redirect('/auth/login');
+	}
+
+	next();
+}
+
+exports.isAuth = (req, res, next) => {
+	if (req.user) {
+		return res.redirect('/');
+	}
+
+	next();
+}
+
+exports.isGuest  = (req, res, next) => {
+	if (req.user) {
+		return res.redirect('/');
 	}
 
 	next();
