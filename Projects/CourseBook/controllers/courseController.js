@@ -1,7 +1,14 @@
 const router = require('express').Router();
-const courseService = require('../services/courseService')
+
 const {getErrorMessage} = require("../utils/errorUtils");
-const {isAuth} = require("../middlewares/authMiddleware")
+const {isAuth} = require("../middlewares/authMiddleware");
+const courseService = require('../services/courseService')
+
+router.get('/', async (req, res) => {
+	const courses = await  courseService.getAll().lean();
+
+	res.render('courses/catalog', {courses});
+})
 
 router.get('/create', isAuth, (req, res) => {
 	res.render('courses/create');

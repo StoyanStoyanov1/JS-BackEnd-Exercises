@@ -1,0 +1,31 @@
+<section id="all-course-page">
+    <article class="all-course-title">
+        <h1>All Courses</h1>
+    </article>
+
+    {{#each courses}}
+    <article class="all-course-card">
+        <article class="all-course-card-image">
+            <img src="{{image}}">
+        </article>
+
+        <article class="all-course-card-content">
+            <h2>{{title}}</h2>
+            <h3>Type: {{type}}</h3>
+            <h3>Price: €{{price}}</h3>
+        </article>
+
+
+
+        <article class="all-course-card-buttons">
+            <a href="#" class="btn-details">Details</a>
+        </article>
+    </article>
+    {{else}}
+        <article class="not-available-courses">
+            <h1>No course created yet.</h1>
+        </article>
+    {{/each}}
+
+
+</section>

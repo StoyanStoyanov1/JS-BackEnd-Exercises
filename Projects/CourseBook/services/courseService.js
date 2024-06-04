@@ -11,3 +11,5 @@ exports.create = async (userId, courseData) => {
 
 	return createCourse;
 };
+
+exports.getAll = () => Course.find();
