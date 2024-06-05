@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const volcanoService = require("../services/volcanoService");
 const {getErrorMessage} = require("../utils/errorUtils");
-const {isAuth, authMiddleware} = require("../middleware/authMiddleware");
+const {isAuth, checkIsOwner} = require("../middleware/authMiddleware");
 
 router.get("/create", isAuth, (req, res) => {
 	res.render("volcano/create");
@@ -26,15 +26,36 @@ router.get('/catalog', async (req, res) => {
 });
 
 router.get('/:volcanoId/details', async (req, res) => {
-	const volcano = await volcanoService.getOne(req.params.volcanoId).lean();
+	const volcanoId = req.params.volcanoId;
 	const userId = req.user?._id
 
-	const isOwner = volcano.owner == userId ? userId: false;
+	const volcano = await volcanoService.getOne(volcanoId).lean();
 
-	const isUserInVoteList = await volcanoService.UserInVoteList(volcano._id, userId) ? userId : false;
+	const isOwner = await checkIsOwner(userId, volcanoId)
+
+	const isUserInVoteList =  userId ? await volcanoService.UserInVoteList(volcano._id, userId) : false;
 
 	res.render('volcano/details', {volcano, isOwner, isUserInVoteList});
-})
+});
+
+router.get('/:volcanoId/delete', isAuth,async (req, res) => {
+	const volcanoId = req.params.volcanoId;
+	const userId = req.user?._id;
+
+	if (!userId) {
+		return res.redirect('/auth/login');
+	}
+
+	const isOwner = await checkIsOwner(userId, volcanoId);
+
+	if (!isOwner) {
+		return  res.redirect('/volcano/catalog');
+	}
+
+	await volcanoService.delete(volcanoId);
+
+	res.redirect('/volcano/catalog');
+});
 
 
 

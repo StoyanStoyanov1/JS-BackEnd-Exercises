@@ -22,6 +22,8 @@ exports.getAll = () => Volcano.find();
 
 exports.getOne = (volcanoId) => Volcano.findById(volcanoId);
 
+exports.delete = (volcanoId) => Volcano.findOneAndDelete(volcanoId);
+
 exports.UserInVoteList = async (volcanoId, userId) => {
 	const volcano = await Volcano.findOne({_id: volcanoId, voteList: userId});
 	return !!volcano;

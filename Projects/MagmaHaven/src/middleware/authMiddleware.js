@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const volcanoService = require('../services/volcanoService')
 
 const {SECRET} = require('../config');
 
@@ -30,3 +31,10 @@ exports.isAuth = (req, res, next) => {
 
 	next();
 }
+
+exports.checkIsOwner = async (userId, volcanoId) => {
+	const volcano = await volcanoService.getOne(volcanoId);
+
+	return String(volcano.owner) === String(userId);
+}
+
