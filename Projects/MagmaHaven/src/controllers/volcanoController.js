@@ -57,6 +57,26 @@ router.get('/:volcanoId/delete', isAuth,async (req, res) => {
 	res.redirect('/volcano/catalog');
 });
 
+router.get('/:volcanoId/vote', isAuth, async (req, res) => {
+	const volcanoId = req.params.volcanoId;
+	const userId = req.user?._id;
+
+	const isOwner = await checkIsOwner(userId, volcanoId);
+
+	if (isOwner) {
+		return res.redirect(`/volcano/${volcanoId}/details`);
+	}
+
+	const isUserVoted = await volcanoService.UserInVoteList(volcanoId, userId);
+
+	if (isUserVoted) {
+		return res.redirect(`/volcano/${volcanoId}/details`);
+	}
+
+	await volcanoService.addVote(volcanoId, userId);
+
+	return res.redirect(`/volcano/${volcanoId}/details`);
+});
 
 
 module.exports = router;
