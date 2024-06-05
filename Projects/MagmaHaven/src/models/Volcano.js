@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
-const {Schema} = require("mongoose");
 
-const volcanoSchema = mongoose.Schema({
+const mongoose = require('mongoose');
+
+const volcanoSchema = new mongoose.Schema({
 	name: {
 		type: String,
 		required: true,
@@ -28,13 +28,16 @@ const volcanoSchema = mongoose.Schema({
 		required: true,
 	},
 	voteList: [{
-		type: Schema.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 	}],
 	owner: {
-		type: Schema.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User',
 		required: true,
 	},
 
-})
+});
+
+const Volcano = mongoose.model('Volcano', volcanoSchema);
+exports.Volcano = Volcano;
