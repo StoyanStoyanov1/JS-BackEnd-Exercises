@@ -11,22 +11,20 @@
 
 <body>
 <header class="header">
-    <!-- In case of error, you should display div with class "errorContainer" -->
-    <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-    <div>
+    <!-- Display the error container if there is an error -->
+    {{#if error}}
         <div class="errorContainer">
             <p>{{error}}</p>
         </div>
-    </div>
+    {{/if}}
 
     <nav>
-        <img src="images/logo.avif" class="logo">
+        <img src="/images/logo.avif" class="logo" alt="Logo">
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">Search</a></li>
             <li><a href="#">All Volcanoes</a></li>
-            {{#if isAuthecticated}}
-
+            {{#if isAuthenticated}}
                 <li><a href="#">Create Volcano Wiki</a></li>
                 <li><a href="/auth/logout">Logout</a></li>
             {{else}}
@@ -38,11 +36,11 @@
 </header>
 
 <main>
-
+    {{{body}}}
 </main>
-{{{body}}}
+
 <footer>
-    <p>&copy JS Back-End 2024</p>
+    <p>&copy; JS Back-End 2024</p>
 </footer>
 
 </body>
