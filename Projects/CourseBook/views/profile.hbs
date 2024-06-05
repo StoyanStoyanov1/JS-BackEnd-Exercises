@@ -1,0 +1,47 @@
+<section id="user">
+    <div class="user-info">
+        <div class="user-logo">
+            <img src="https://ps.w.org/user-avatar-reloaded/assets/icon-256x256.png?rev=2540745" alt="User Avatar">
+        </div>
+        <h1 class="user-email">{{user.email}}</h1>
+        <h2 class="created-course-count">Total Created Course: {{createdCoursesCount}}</h2>
+        <h2 class="sign-course-count">Total Sign up Course: {{signUpCoursesCount}}</h2>
+    </div>
+</section>
+
+<section class="profile-course">
+    {{#if user.createdCourses.length}}
+        <div class="created-course">
+            <h2 class="section-title">Created Course</h2>
+            {{#each user.createdCourses}}
+                <div class="info">
+                    <h2 class="title">{{this.title}}</h2>
+                    <h4 class="genre">Type: {{this.type}}</h4>
+                    <div class="learn-more">
+                        <a href="/courses/{{this._id}}/details">Learn More...</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <h2 class="no-course-in-profile">You haven't created a course yet...</h2>
+    {{/if}}
+
+    {{#if user.signedUpCourses.length}}
+        <div class="sign-course">
+            <h2 class="section-title">Sign Up Course</h2>
+            {{#each user.signedUpCourses}}
+                <div class="info">
+                    <h2 class="title">{{this.title}}</h2>
+                    <h4 class="genre">Type: {{this.type}}</h4>
+                    <h4 class="certificate">Certificate: {{#if this.certificate}}Yes{{else}}No{{/if}}</h4>
+                    <div class="learn-more">
+                        <a href="/courses/{{this._id}}/details">Learn More...</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <h2 class="no-course-in-profile">You haven't signed up for any course yet...</h2>
+    {{/if}}
+</section>
