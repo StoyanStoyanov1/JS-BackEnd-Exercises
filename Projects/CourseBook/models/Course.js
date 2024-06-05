@@ -17,7 +17,7 @@ const coursesSchema = new mongoose.Schema({
 	},
 	image: {
 		type: String,
-		match: /^https?:\/\/$/,
+		match: /^https?:\/\//,
 		required: true,
 	},
 	description: {
@@ -30,6 +30,7 @@ const coursesSchema = new mongoose.Schema({
 		min: 0,
 		required: true,
 	},
+	createdAt: { Date },
 	signUpList: [
 		{
 			type: mongoose.Types.ObjectId,
@@ -41,6 +42,12 @@ const coursesSchema = new mongoose.Schema({
 		ref: 'User',
 	}
 });
+
+coursesSchema.pre('save', () => {
+	if (!this.createdAt) {
+		this.exports = Date.now();
+	}
+})
 
 const Course = mongoose.model('Course', coursesSchema);
 

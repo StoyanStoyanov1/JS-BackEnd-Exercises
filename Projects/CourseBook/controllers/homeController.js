@@ -1,7 +1,10 @@
 const router = require('express').Router();
+const courseService = require('../services/courseService');
 
-router.get('/', (req, res) => {
-	res.render('home');
+router.get('/', async (req, res) => {
+	const latestCourses = await courseService.getLatest().lean();
+
+	res.render('home', {latestCourses});
 })
 
 module.exports = router;
