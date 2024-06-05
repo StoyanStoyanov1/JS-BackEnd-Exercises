@@ -19,3 +19,10 @@ exports.create = async (userId, courseData) => {
 };
 
 exports.getAll = () => Volcano.find();
+
+exports.getOne = (volcanoId) => Volcano.findById(volcanoId);
+
+exports.UserInVoteList = async (volcanoId, userId) => {
+	const volcano = await Volcano.findOne({_id: volcanoId, voteList: userId});
+	return !!volcano;
+};

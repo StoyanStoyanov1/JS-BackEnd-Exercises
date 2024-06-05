@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const volcanoService = require("../services/volcanoService");
 const {getErrorMessage} = require("../utils/errorUtils");
-const {isAuth} = require("../middleware/authMiddleware");
+const {isAuth, authMiddleware} = require("../middleware/authMiddleware");
 
 router.get("/create", isAuth, (req, res) => {
 	res.render("volcano/create");
@@ -24,6 +24,17 @@ router.get('/catalog', async (req, res) => {
 
 	res.render('volcano/catalog', {catalog});
 });
+
+router.get('/:volcanoId/details', async (req, res) => {
+	const volcano = await volcanoService.getOne(req.params.volcanoId).lean();
+	const userId = req.user?._id
+
+	const isOwner = volcano.owner == userId ? userId: false;
+
+	const isUserInVoteList = await volcanoService.UserInVoteList(volcano._id, userId) ? userId : false;
+
+	res.render('volcano/details', {volcano, isOwner, isUserInVoteList});
+})
 
 
 
