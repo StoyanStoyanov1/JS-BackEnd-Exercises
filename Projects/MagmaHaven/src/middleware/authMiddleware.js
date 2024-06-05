@@ -25,7 +25,7 @@ exports.authMiddleware = async (req, res, next) => {
 
 exports.isAuth = (req, res, next) => {
 	if (!req.user) {
-		res.redirect('auth/login');
+		res.redirect('/auth/register');
 	}
 
 	next();
