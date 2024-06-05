@@ -10,6 +10,10 @@ const volcanoSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	image: {
+		type: String,
+		required: true,
+	},
 	elevation: {
 		type: Number,
 		required: true,
