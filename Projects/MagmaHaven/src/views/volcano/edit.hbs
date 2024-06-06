@@ -1,0 +1,38 @@
+{{#if error}}
+    <div>
+        <div class="errorContainer">
+            <p>{{error}}</p>
+        </div>
+    </div>
+{{/if}}
+
+<section id="edit-container">
+    <div class="edit-container-info">
+        <h1>Edit Announcement</h1>
+        <form  method="post">
+            <label>Name:</label>
+            <input type="text" id="name" name="name"  value="{{name}}">
+            <label>Location:</label>
+            <input type="text" id="location" name="location"  value="{{location}}">
+            <label>Elevation:</label>
+            <input type="number" id="elevations" name="elevation" value="{{elevation}}">
+            <label>Year of Last Eruption:</label>
+            <input type="number" id="last-year-eruption" name="lastEruption"  value="{{lastEruption}}">
+            <label>Image:</label>
+            <input type="text" id="image" name="image"
+                   value="{{image}}">
+            <label>Volcano Type:</label>
+            <select id="type" name="typeVolcano" value="{{typeVolcano}}">
+                <option value="Supervolcanoes">Supervolcanoes</option>
+                <option value="Submarine" selected>Submarine</option>
+                <option value="Subglacial">Subglacial</option>
+                <option value="Mud">Mud</option>
+                <option value="Stratovolcanoes">Stratovolcanoes</option>
+                <option value="Shield">Shield</option>
+            </select>
+            <label>Description:</label>
+            <textarea id="description" name="description" placeholder="...">{{description}}</textarea>
+            <input type="submit" id="btn" value="Submit">
+        </form>
+    </div>
+</section>

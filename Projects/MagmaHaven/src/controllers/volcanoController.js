@@ -78,5 +78,31 @@ router.get('/:volcanoId/vote', isAuth, async (req, res) => {
 	return res.redirect(`/volcano/${volcanoId}/details`);
 });
 
+router.get('/:volcanoId/edit', isAuth,async (req, res) => {
+	const volcanoId = req.params.volcanoId;
+	const userId = req.owner?._id;
+
+	const isOwner = checkIsOwner(userId, volcanoId);
+
+	if (!isOwner) {
+		res.redirect(`/volcano/catalog`);
+	}
+
+	const volcano = await volcanoService.getOne(volcanoId).lean();
+
+	res.render('volcano/edit', volcano);
+});
+
+router.post('/:volcanoId/edit', isAuth, async (req, res) => {
+	const volcanoId = req.params.volcanoId;
+
+	const volcanoData = req.body;
+
+	await volcanoService.edit(volcanoId, volcanoData);
+
+	res.redirect(`/volcano/${volcanoId}/details`);
+
+})
+
 
 module.exports = router;

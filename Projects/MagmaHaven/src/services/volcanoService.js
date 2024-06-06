@@ -9,14 +9,6 @@ exports.create = async (ownerId, volcanoData) => {
 	return createVolcano;
 }
 
-exports.create = async (userId, courseData) => {
-	const createCourse = await Volcano.create({
-		owner: userId,
-		...courseData,
-	});
-
-	return createCourse;
-};
 
 exports.getAll = () => Volcano.find();
 
@@ -41,4 +33,14 @@ exports.addVote = async (volcanoId, userId) => {
 exports.UserInVoteList = async (volcanoId, userId) => {
 	const volcano = await Volcano.findOne({_id: volcanoId, voteList: userId});
 	return !!volcano;
+};
+
+exports.edit = async (volcanoId, volcanoData) => {
+	try {
+		const updatedVolcano = await Volcano.findByIdAndUpdate(volcanoId, volcanoData, { new: true });
+		return updatedVolcano;
+	} catch (error) {
+		console.error('Error updating volcano:', error);
+		throw error;
+	}
 };
