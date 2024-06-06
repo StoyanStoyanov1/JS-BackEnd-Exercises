@@ -80,12 +80,12 @@ router.get('/:volcanoId/vote', isAuth, async (req, res) => {
 
 router.get('/:volcanoId/edit', isAuth,async (req, res) => {
 	const volcanoId = req.params.volcanoId;
-	const userId = req.owner?._id;
+	const userId = req.user?._id;
 
 	const isOwner = checkIsOwner(userId, volcanoId);
 
 	if (!isOwner) {
-		res.redirect(`/volcano/catalog`);
+		return res.redirect(`/volcano/catalog`);
 	}
 
 	const volcano = await volcanoService.getOne(volcanoId).lean();
