@@ -16,6 +16,8 @@ exports.getOne = (volcanoId) => Volcano.findById(volcanoId);
 
 exports.delete = (volcanoId) => Volcano.findOneAndDelete(volcanoId);
 
+exports.search = (searchCriteria) => Volcano.find(searchCriteria);
+
 exports.addVote = async (volcanoId, userId) => {
 	try {
 		const volcano = await Volcano.findByIdAndUpdate(

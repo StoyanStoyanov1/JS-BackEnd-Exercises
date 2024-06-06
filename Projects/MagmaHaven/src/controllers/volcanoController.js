@@ -104,5 +104,31 @@ router.post('/:volcanoId/edit', isAuth, async (req, res) => {
 
 })
 
+router.get('/search', async (req, res) => {
+	const volcanoes = await volcanoService.getAll().lean();
+
+	res.render('volcano/search', {volcanoes});
+});
+
+router.post('/search', async (req, res) => {
+	const {name, typeVolcano} = req.body;
+	const searchCriteria = {};
+
+	if (name) {
+		searchCriteria.name = new RegExp(name, 'i');
+	}
+
+	if (typeVolcano) {
+		searchCriteria.typeVolcano = typeVolcano;
+	}
+
+	try {
+		const volcanoes = await volcanoService.search(searchCriteria).lean();
+		res.render('volcano/search', {volcanoes});
+	} catch (err) {
+		console.log('Error searching volcanoes:', err);
+	}
+});
+
 
 module.exports = router;
